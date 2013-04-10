@@ -1,14 +1,68 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>CapacitacionesComfamiliar</title>
+  <title>Capacitaciones Comfamiliar</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="contaniner">
+  <%if notice%>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <p class="notice"><%= notice %></p>
+    </div>
+  <%end%>
+  <%if alert%>
+    <div class="alert alert-error">
+      <button type="button" class="close" data-dismiss="alert">×</button>
+      <p><%= alert %></p>
+    </div>
+  <%end%>
+</div>
+
+
+<div class= "navbar navbar-fixed-top" >
+  <div class="navbar-inner">
+    <div class "contaniner">
+      <a <%=link_to "Capacitaciones Comfamiliar" , "#", class: "brand" %>
+      <ul class="nav">
+        <li><%=link_to "Eventos" , "#" %></li>
+      
+      <%if capacitador_signed_in? %>
+        <li><%=link_to "Follow Events", "#"%> </li>
+        <li><%=link_to "New Event", "#"%> </li>
+      <%end%>
+      </ul>
+        <%if capacitador_signed_in? %>
+        <ul class = "nav pull-right">
+          
+          <li><%=link_to "Nombre Apellido", "#"%> </li>
+          <li><%=link_to "Log Out", "#"%></li>
+        </ul>
+      <%else%>
+        <ul class = "nav pull-right">
+          <li><%=link_to "Registrarse", "#"%> </li>
+          <li><%=link_to "Iniciar Sesión", "#"%> </li>
+          </ul>
+      <%end%>
+      
+    </div>
+  </div>
+</div>
+<div class="general">
+  <%= yield %>
+</div>
+
+<footer class= "navbar navbar-fixed-bottom">
+  <div class="navbar-inner">
+    <div class="container">
+      <a href="http://www.comfamiliar.com.co" class ="brand">&copy; Comfamiliar</a> 
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>

@@ -11,6 +11,61 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20130410045709) do
+
+  create_table "capacitacion_usuarios", :force => true do |t|
+    t.integer  "usuario_id"
+    t.integer  "capacitacion_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "capacitacion_usuarios", ["capacitacion_id"], :name => "index_capacitacion_usuarios_on_capacitacion_id"
+  add_index "capacitacion_usuarios", ["usuario_id"], :name => "index_capacitacion_usuarios_on_usuario_id"
+
+  create_table "capacitacions", :force => true do |t|
+    t.string   "tema"
+    t.float    "valor"
+    t.datetime "fecha"
+    t.string   "institucion"
+    t.text     "observaciones"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "capacitador_id"
+  end
+
+  create_table "capacitadors", :force => true do |t|
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.string   "nombres"
+    t.string   "apellidos"
+    t.string   "tipo_identificacion"
+    t.string   "identificacion"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "capacitadors", ["email"], :name => "index_capacitadors_on_email", :unique => true
+  add_index "capacitadors", ["reset_password_token"], :name => "index_capacitadors_on_reset_password_token", :unique => true
+
+  create_table "usuarios", :force => true do |t|
+    t.string   "nombres"
+    t.string   "apellidos"
+    t.string   "tipo_identificacion"
+    t.string   "identificacion"
+    t.string   "telefono"
+    t.string   "email"
+    t.string   "categoria"
+    t.datetime "created_at",          :null => false
+    t.datetime "updated_at",          :null => false
+  end
 
 end
