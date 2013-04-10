@@ -1,4 +1,6 @@
 CapacitacionesComfamiliar::Application.routes.draw do
+  resources :capacitacions
+
   devise_for :capacitadors
 
   root :to => "home#index"

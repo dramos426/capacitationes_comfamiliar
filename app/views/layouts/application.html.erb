@@ -8,7 +8,7 @@
 </head>
 <body>
 
-<div class="contaniner">
+<div class="flash_message">
   <%if notice%>
     <div class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert">×</button>
@@ -26,33 +26,29 @@
 
 <div class= "navbar navbar-fixed-top" >
   <div class="navbar-inner">
-    <div class "contaniner">
+    <div class "container">
       <a <%=link_to "Capacitaciones Comfamiliar" , "#", class: "brand" %>
       <ul class="nav">
-        <li><%=link_to "Eventos" , "#" %></li>
-      
       <%if capacitador_signed_in? %>
-        <li><%=link_to "Follow Events", "#"%> </li>
-        <li><%=link_to "New Event", "#"%> </li>
+        <li><%=link_to "Capacitaciones", "#"%> </li>
       <%end%>
       </ul>
         <%if capacitador_signed_in? %>
-        <ul class = "nav pull-right">
-          
-          <li><%=link_to "Nombre Apellido", "#"%> </li>
-          <li><%=link_to "Log Out", "#"%></li>
-        </ul>
+          <ul class = "nav pull-right">
+            <li><%=link_to "#{current_capacitador.nombres} #{current_capacitador.apellidos}", edit_capacitador_registration_path%> </li>
+            <li><%=link_to "Cerrar Sesión", destroy_capacitador_session_path, method: :delete%></li>
+          </ul>
       <%else%>
         <ul class = "nav pull-right">
-          <li><%=link_to "Registrarse", "#"%> </li>
-          <li><%=link_to "Iniciar Sesión", "#"%> </li>
-          </ul>
+          <li><%=link_to "Registrarse", new_capacitador_registration_path%> </li>
+          <li><%=link_to "Iniciar Sesión", new_capacitador_session_path%> </li>
+        </ul>
       <%end%>
-      
     </div>
   </div>
 </div>
-<div class="general">
+
+<div class="general container">
   <%= yield %>
 </div>
 
