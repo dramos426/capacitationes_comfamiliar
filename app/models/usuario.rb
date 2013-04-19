@@ -1,7 +1,7 @@
 # encoding: utf-8
 class Usuario < ActiveRecord::Base
 	TIPOS_IDENTIFICACION = {:cedula => "Cédula de ciudadanía", :cedula_ext => "Cédula de extranjería", :pasaporte => "Pasaporte", :tarjeta_ident => "Tarjeta de identidad"}
-  CATEGORIAS = {:cat_a => "A", :cat_b => "B", :cat_c => "C", :cat_c => "D"}
+  CATEGORIAS = {:cat_a => "A", :cat_b => "B", :cat_c => "C", :cat_d => "D", :cat_e => "E"}
   attr_accessible :apellidos, :categoria, :email, :identificacion, :nombres, :telefono, :tipo_identificacion
 
   validates :nombres, presence: true

@@ -2,7 +2,7 @@
 class CapacitacionsController < ApplicationController
 
   def new
-    @capacitacion = Capacitacion.new
+    @capacitaciones = Capacitacion.new
   end
 
   def create
@@ -10,7 +10,7 @@ class CapacitacionsController < ApplicationController
     if @capacitacion.save
       redirect_to @capacitacion, notice: "La capacitación ha sido creada correctamente"
     else
-      flash[:alert] "La capacitación no se ha podido eliminar"
+      flash[:alert] = "La capacitación no se ha podido crear"
       redirect_to :root
     end
   end
@@ -28,7 +28,7 @@ class CapacitacionsController < ApplicationController
     if @capacitacion.destroy
       redirect_to capacitacions_path, notice: "La capacitación ha sido eliminada correctamente"
     else
-      flash[:alert] "La capacitación no se ha podido eliminar"
+      flash[:alert] = "La capacitación no se ha podido eliminar"
       redirect_to :root
     end
   end
@@ -38,11 +38,12 @@ class CapacitacionsController < ApplicationController
     if @capacitacion.updates_attributes(params[:capacitacion])
       redirect_to @capacitacion, notice: "La capacitación ha sido actualizada correctamente"
     else
-      flash[:alert] "La capacitación no se ha podido actualizar"
+      flash[:alert] = "La capacitación no se ha podido actualizar"
       render :edit
     end
   end
 
   def show
+
   end
 end
