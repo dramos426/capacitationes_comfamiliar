@@ -4,26 +4,26 @@
 	
 </div>
 <table>
-	  <tr>
-	    <th>Tema</th>
-	    <th>Capacitador</th>
-	    <th>Fecha</th>
-	    <th></th>
-	    <th></th>
-	    <th></th>
-	  </tr>
+  <tr>
+    <th>Tema</th>
+    <th>Capacitador</th>
+    <th>Fecha</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
 
-		<% @Capacitaciones.each do |capacitacion| %>
-  	<tr>
-    	<td><%= capacitacion.tema %></td>
-    	<td><%= capacitacion. capacitador_id%></td>
-    	<td><%= capacitacion.fecha %></td>
-    	<td><%= link_to 'Detalles', "#" %></td>
-    	<td><%= link_to 'Editar', "#" %></td>
-    	<td><%= link_to 'Borrar', "#" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  	</tr>
-		<% end %>
-	</table>
+	<% @Capacitaciones.each do |capacitacion| %>
+	<tr>
+  	<td><%= capacitacion.tema %></td>
+  	<td><%= capacitacion. capacitador_id%></td>
+  	<td><%= capacitacion.fecha %></td>
+  	<td><%= link_to 'Detalles', "#" %></td>
+  	<td><%= link_to 'Editar', "#" %></td>
+  	<td><%= link_to 'Borrar', "#" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+	</tr>
+	<% end %>
+</table>
 
 <br />
 

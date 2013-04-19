@@ -2,7 +2,7 @@
 class CapacitacionsController < ApplicationController
 
   def new
-    @capacitaciones = Capacitacion.new
+    @capacitacion = Capacitacion.new
   end
 
   def create
@@ -17,6 +17,9 @@ class CapacitacionsController < ApplicationController
 
   def index
     @capacitacions = Capacitacion.all
+    if @capacitacions.size < 1
+      redirect_to new_capacitacion_path, notice: "Aún no se han creado capacitaciones, hágalo ahora!"
+    end
   end
 
   def edit
