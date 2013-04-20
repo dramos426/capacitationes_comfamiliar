@@ -1,5 +1,6 @@
 # encoding: utf-8
 class CapacitacionsController < ApplicationController
+  before_filter :authenticate_capacitador!
 
   def new
     @capacitacion = Capacitacion.new

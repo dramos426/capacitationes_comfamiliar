@@ -12,7 +12,7 @@ class Usuario < ActiveRecord::Base
   validates :categoria, :length => {maximum: 1}
 
   has_many :capacitacion_usuarios
-  has_many :capacitadors, :trought => :capacitacion_usuarios
+  has_many :capacitadors, :through => :capacitacion_usuarios
 
   def full_name
   	"#{self.nombres} #{self.apellidos}"

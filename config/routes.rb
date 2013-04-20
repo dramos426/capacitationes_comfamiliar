@@ -1,5 +1,8 @@
 CapacitacionesComfamiliar::Application.routes.draw do
-  resources :capacitacions
+
+  resources :capacitacions do
+    resources :usuarios, :only => [:show, :create, :destroy, :update]
+  end
 
   devise_for :capacitadors
 
