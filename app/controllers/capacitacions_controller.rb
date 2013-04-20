@@ -10,14 +10,20 @@ class CapacitacionsController < ApplicationController
     if @capacitacion.save
       redirect_to @capacitacion, notice: "La capacitación ha sido creada correctamente"
     else
-      flash[:alert] = "La capacitación no se ha podido crear"
-      redirect_to :root
+      if @capacitacion.errors.any?
+        resp = ""
+        @capacitacion.errors.full_messages.each do |msg|
+          resp = resp + " - " + msg
+        end
+      end
+      flash[:alert] = "La capacitación no se ha podido crear #{resp}"
+      render :new
     end
   end
 
   def index
-    @capacitacions = Capacitacion.all
-    if @capacitacions.size < 1
+    @capacitaciones = Capacitacion.all
+    if @capacitaciones.size < 1
       redirect_to new_capacitacion_path, notice: "Aún no se han creado capacitaciones, hágalo ahora!"
     end
   end
@@ -38,7 +44,7 @@ class CapacitacionsController < ApplicationController
 
   def update
     @capacitacion = Capacitacion.find(params[:id])
-    if @capacitacion.updates_attributes(params[:capacitacion])
+    if @capacitacion.update_attributes(params[:capacitacion])
       redirect_to @capacitacion, notice: "La capacitación ha sido actualizada correctamente"
     else
       flash[:alert] = "La capacitación no se ha podido actualizar"
@@ -47,6 +53,6 @@ class CapacitacionsController < ApplicationController
   end
 
   def show
-
+    @capacitacion= Capacitacion.find(params[:id])
   end
 end

@@ -1,0 +1,11 @@
+<div class="form-inputs">
+	<%= simple_form_for @capacitacion  do |f| %>
+	  <%= f.input :tema, label: 'Temática', :autofocus => true %>
+	  <%= f.input :valor, label: 'Valor' %>
+	  <%= f.input :institucion, label: 'Institución' %>
+	  <%= f.input :fecha, as: :date, order: [:day, :month, :year]%>
+	  <div class="form-actions">
+	    <%= f.button :submit, "Aceptar", class: "btn-primary btn-large"%>
+	  </div>
+	<% end %>
+</div>

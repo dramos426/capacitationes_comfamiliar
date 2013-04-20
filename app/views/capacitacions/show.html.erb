@@ -1,0 +1,16 @@
+<fieldset>
+	<legend>
+		Capacitación - <%=@capacitacion.tema%>
+	</legend>
+	<div class="well">
+		<p><strong>Tema:</strong> <%=@capacitacion.tema%></p>
+		<p><strong>Valor:</strong> <%=@capacitacion.valor%></p>
+		<p><strong>Institución:</strong> <%=@capacitacion.institucion%></p>
+		<p><strong>Fecha:</strong> <%=@capacitacion.fecha%></p>
+	</div>
+	<div class="actions">
+		<%=link_to "Editar", edit_capacitacion_path(@capacitacion), class: "btn btn-primary"%>
+
+		<%=link_to "Eliminar", capacitacion_path(@capacitacion), method: :delete, class: "btn btn-primary", confirm: "¿Estás seguro de eliminar esta capacitación?"%>
+	</div>
+</fieldset>

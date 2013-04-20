@@ -30,7 +30,7 @@
       <a><%=link_to "|  INICIO" , root_path, class: "brand" %></a>
       <ul class="nav">
       <%if capacitador_signed_in? %>
-        <li><%=link_to "Capacitaciones", capacitacions_path, %> </li>
+        <li><%=link_to "Capacitaciones", capacitacions_path %> </li>
       <%end%>
       </ul>
         <%if capacitador_signed_in? %>

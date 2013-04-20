@@ -1,30 +1,30 @@
-<div class="well">
-	<h1 align="center">Listado de Capacitaciones</h1>
-
-	
-</div>
-<table>
+<fieldset>
+  <legend>
+    Listado de Capacitaciones
+  </legend>
+</fieldset>
+<table class="table table-hover">
   <tr>
     <th>Tema</th>
-    <th>Capacitador</th>
+    <th>Valor</th>
     <th>Fecha</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Institución</th>
+    <th>Capacitador</th>
+    <th>Acciones</th>
   </tr>
 
-	<% @Capacitaciones.each do |capacitacion| %>
+	<% @capacitaciones.each do |capacitacion| %>
 	<tr>
   	<td><%= capacitacion.tema %></td>
-  	<td><%= capacitacion. capacitador_id%></td>
-  	<td><%= capacitacion.fecha %></td>
-  	<td><%= link_to 'Detalles', "#" %></td>
-  	<td><%= link_to 'Editar', "#" %></td>
-  	<td><%= link_to 'Borrar', "#" , method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= capacitacion.valor %></td>
+  	<td><%= capacitacion.fecha.strftime("%m/%d/%Y") %></td>
+    <td><%= capacitacion.institucion %></td>
+    <td><%= capacitacion.capacitador%></td>
+  	<td><%= link_to 'Detalles', capacitacion%> - <%= link_to 'Editar', edit_capacitacion_path(capacitacion) %> - <%= link_to 'Eliminar', capacitacion , method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' } %></td>
 	</tr>
 	<% end %>
 </table>
 
 <br />
 
-<%= link_to 'Nueva Capacitacion', "#" %>
+<%= link_to 'Nueva Capacitacion', new_capacitacion_path, class: "btn btn-primary" %>
