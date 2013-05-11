@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130410045709) do
+ActiveRecord::Schema.define(:version => 20130511201717) do
 
   create_table "capacitacion_usuarios", :force => true do |t|
     t.integer  "usuario_id"
@@ -25,13 +25,19 @@ ActiveRecord::Schema.define(:version => 20130410045709) do
 
   create_table "capacitacions", :force => true do |t|
     t.string   "tema"
-    t.float    "valor"
     t.datetime "fecha"
     t.string   "institucion"
     t.text     "observaciones"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "capacitador_id"
+    t.float    "valor_base"
+    t.float    "valor_cat_a"
+    t.float    "valor_cat_b"
+    t.float    "valor_cat_c"
+    t.float    "valor_cat_d"
+    t.boolean  "cat_e"
+    t.float    "valor_cat_e"
   end
 
   create_table "capacitadors", :force => true do |t|

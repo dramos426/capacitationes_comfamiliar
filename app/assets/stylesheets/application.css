@@ -23,3 +23,9 @@
 .general.container{
   padding-bottom: 20px;
 }
+#capacitation_form label{
+  display: inline;
+}
+#observaciones{
+  width: 922px;
+}

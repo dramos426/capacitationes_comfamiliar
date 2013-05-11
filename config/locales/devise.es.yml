@@ -41,4 +41,5 @@ es:
     failure:
       invalid: "Ha ingresado una contraseña errada."
       not_found_in_database: "El email digitado no se encuentra registrado."
+      unauthenticated: "Necesitas estar autenticado para poder acceder a este sitio."
 

@@ -1,12 +1,40 @@
-<div class="form-inputs">
-	<%= simple_form_for @capacitacion  do |f| %>
-	  <%= f.input :tema, label: 'Temática', :autofocus => true %>
-	  <%= f.input :capacitador_id, label: 'Capacitador', :autofocus => true, collection: Capacitador.all.map{|c| [c.full_name, c.id]} %>
-	  <%= f.input :valor, label: 'Valor Base', :placeholder=> "Valor para no afiliado" %>
-	  <%= f.input :institucion, label: 'Institución' %>
-	  <%= f.input :fecha, as: :date, order: [:day, :month, :year]%>
-	  <div class="form-actions">
-	    <%= f.button :submit, "Aceptar", class: "btn-primary btn-large"%>
+<div class="form-inputs well" id="capacitation_form" >
+	<%= form_for @capacitacion  do |f| %>
+	  <div class="tema">
+	  	<h4>General</h4>
+	  	<%= f.label :tema, 'Temática:'%>
+	  	<%= f.text_field :tema%>
+	  	<%= f.label :institucion, 'Institución:'%>
+	  	<%= f.text_field :institucion%>
+	  	<%= f.label :capacitador, 'Capacitador:'%>
+	  	<%= f.select :capacitador, options_for_select(Capacitador.all.map{|c| [c.full_name, c.id]}, @capacitacion.capacitador.id)%>
+	  	<br>
+	  	<%= f.label :fecha, 'Fecha:'%>
+	  	<%= f.text_field :fecha, id: 'datepicker'%>
+	  </div>
+	  <hr>
+	  <div class="values">
+	  	<h4>Valores</h4>
+	  	<%= f.label :valor_base, 'Valor Base:'%>
+	  	<br>
+	  	<%= f.text_field :valor_base%>
+	  	<br>
+	  	<br>
+	  	<%= f.label :valor_cat_a, 'Categoria A:'%>
+	  	<%= f.text_field :valor_cat_a, enable: "false"%>
+	  	<%= f.label :valor_cat_b, 'Categoria B:'%>
+	  	<%= f.text_field :valor_cat_b%>
+	  	<%= f.label :valor_cat_c, 'Categoria C:'%>
+	  	<%= f.text_field :valor_cat_c%>
+	  	<%= f.label :valor_cat_d, 'Categoria D:'%>
+	  	<%= f.text_field :valor_cat_d%>
+	  	<%= f.label :valor_cat_e, 'Categoria E:'%>
+	  	<%= f.text_field :valor_cat_e%>
+	  </div>
+	  <hr>
+	  <div class="observations">
+	  	<h4>Observaciones</h4>
+	  	<%= text_area_tag(:observaciones, @capacitacion.observaciones, :size => "24x10") %>
 	  </div>
 	<% end %>
 </div>

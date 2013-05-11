@@ -6,7 +6,7 @@
 <table class="table table-hover">
   <tr>
     <th>Tema</th>
-    <th>Valor</th>
+    <th>Valor Base</th>
     <th>Fecha</th>
     <th>Institución</th>
     <th>Capacitador</th>
@@ -16,7 +16,7 @@
 	<% @capacitaciones.each do |capacitacion| %>
 	<tr>
   	<td><%= capacitacion.tema %></td>
-    <td><%= capacitacion.valor %></td>
+    <td><%= capacitacion.valor_base %></td>
   	<td><%= capacitacion.fecha.strftime("%m/%d/%Y") %></td>
     <td><%= capacitacion.institucion %></td>
     <td><%= capacitacion.capacitador.full_name%></td>
