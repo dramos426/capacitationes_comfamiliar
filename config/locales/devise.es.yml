@@ -8,8 +8,8 @@ es:
   devise:
     sessions:
       link: 'Iniciar Sesión'
-      signed_in: 'Sesión iniciada.'
-      signed_out: 'Sesión finalizada.'
+      signed_in: 'Sesión iniciada correctamente.'
+      signed_out: 'Sesión finalizada correctamente.'
       unauthenticated: 'Tenés que iniciar sesión para poder continuar.'
       unconfirmed: 'Tenés que confirmar tu cuenta para poder continuar.'
       locked: 'Tu cuenta está bloqueada.'
@@ -35,7 +35,10 @@ es:
       send_instructions: 'Vas a recibir instrucciones para desbloquear tu cuenta en unos pocos minutos.'
       unlocked: 'Tu cuenta fue desbloqueada. Ya iniciaste sesión.'
     mailer:
-      confirmation_instructions: 'Instrucciones de confirmación'
-      reset_password_instructions: 'Instrucciones de recuperación de contraseña'
-      unlock_instructions: 'Instrucciones para desbloquear'
+      confirmation_instructions: 'Instrucciones de confirmación.'
+      reset_password_instructions: 'Instrucciones de recuperación de contraseña.'
+      unlock_instructions: 'Instrucciones para desbloquear.'
+    failure:
+      invalid: "Ha ingresado una contraseña errada."
+      not_found_in_database: "El email digitado no se encuentra registrado."
 
