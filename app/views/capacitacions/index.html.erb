@@ -20,11 +20,15 @@
   	<td><%= capacitacion.fecha.strftime("%m/%d/%Y") %></td>
     <td><%= capacitacion.institucion %></td>
     <td><%= capacitacion.capacitador.full_name%></td>
-  	<td><%= link_to 'Detalles', capacitacion%> - <%= link_to 'Editar', edit_capacitacion_path(capacitacion) %> - <%= link_to 'Eliminar', capacitacion , method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' } %></td>
+  	<td>
+        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), capacitacion, class: "btn", :rel => "tooltip", :"title" => "Ver detalles")%>
+        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_capacitacion_path(capacitacion), class: "btn", :rel => "tooltip", :"title" => "Editar capacitación")%>
+        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), capacitacion, method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar capacitacion")%>
+    </td>
 	</tr>
 	<% end %>
 </table>
 
 <br />
 
-<%= link_to 'Nueva Capacitacion', new_capacitacion_path, class: "btn btn-primary" %>
+<%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-plus icon-white")+" Nueva Capacitacion"), new_capacitacion_path, class: "btn btn-primary", :rel => "tooltip", :"title" => "Nueva Capacitacion")%>

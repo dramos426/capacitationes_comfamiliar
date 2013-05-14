@@ -28,16 +28,16 @@
 <div class= "navbar navbar-fixed-top" >
   <div class="navbar-inner">
     <div class="container">
-      <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-home icon-white")+" Inicio"), root_path, class: "brand", :rel => "tooltip", :"title" => "Inicio")%>
       <ul class="nav">
+      <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-home icon-white")+" "), root_path, class: "brand", :rel => "tooltip", :"title" => "Ir al inicio")%>
       <%if capacitador_signed_in? %>
-        <li><%=link_to "Capacitaciones", capacitacions_path %> </li>
+        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-list icon-white")+" "), capacitacions_path, class: "brand", :rel => "tooltip", :"title" => "Listado de capacitaciones")%>
       <%end%>
       </ul>
         <%if capacitador_signed_in? %>
           <ul class = "nav pull-right">
-            <li><%=link_to "#{current_capacitador.nombres} #{current_capacitador.apellidos}", edit_capacitador_registration_path%> </li>
-            <li><%=link_to "Cerrar Sesión", destroy_capacitador_session_path, method: :delete%></li>
+            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-user icon-white")+" #{current_capacitador.nombres}"), edit_capacitador_registration_path, class: "brand", :rel => "tooltip", :"title" => "Editar perfil")%>
+            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-off icon-white")+" Cerrar Sesión"), destroy_capacitador_session_path, method: :delete, class: "brand", :rel => "tooltip", :"title" => "Cerrar sesión")%>
           </ul>
       <%else%>
         <ul class = "nav pull-right">
