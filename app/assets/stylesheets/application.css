@@ -27,5 +27,8 @@
   display: inline;
 }
 #observaciones{
-  width: 922px;
+  width: 890px;
+}
+.hide{
+	display: none;
 }

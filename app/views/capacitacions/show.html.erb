@@ -7,11 +7,68 @@
 		<p><strong>Capacitador:</strong> <%=@capacitacion.capacitador.full_name%></p>
 		<p><strong>Valor base:</strong> <%=@capacitacion.valor_base%></p>
 		<p><strong>Institución:</strong> <%=@capacitacion.institucion%></p>
-		<p><strong>Fecha:</strong> <%=@capacitacion.fecha%></p>
+		<p><strong>Fecha:</strong> <%=@capacitacion.fecha.strftime("%d/%m/%Y")%></p>
 	</div>
 	<div class="actions">
 		<%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil icon-white")+" Editar"), edit_capacitacion_path(@capacitacion), class: "btn btn-primary", :rel => "tooltip", :"title" => "Editar Capacitacion")%>
 
 		<%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash icon-white")+" Eliminar"), capacitacion_path(@capacitacion), method: :delete, class: "btn btn-primary", confirm: "¿Estás seguro de eliminar esta capacitación?", :rel => "tooltip", :"title" => "Eliminar Capacitacion")%>
+
+		<button class="btn", id="add_user">Agregar Usuario <%=content_tag(:span, content_tag(:i, nil, :class => " icon-chevron-down icon-black"))%></button>
+	</div>
+	<br>
+	<legend>
+		Usuarios
+	</legend>
+	<div class="well hide", id="form_user">
+		<%= form_for [@capacitacion, @usuarios.build], :html => {:id => "new_user"} do |f|%>
+			<%= f.label :tipo_identificacion%>
+			<%= f.select :tipo_identificacion, options_for_select(Usuario::TIPOS_IDENTIFICACION.invert)%>
+			<%= f.label :identificacion%>
+			<%= f.text_field :identificacion%>
+			<%= f.label :nombres%>
+			<%= f.text_field :nombres%>
+			<%= f.label :apellidos%>
+			<%= f.text_field :apellidos%>
+			<%= f.label :categoria%>
+			<%if @capacitacion.valor_cat_e.present?%>
+				<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert)%>
+			<%else%>
+				<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert.delete_if {|key, val| key == "E"})%>
+			<%end%>
+			<br>
+			<%= f.submit "Agregar Usuario" , class: "btn btn-primary", id: "add_new_user"%>
+		<%end%>
+	</div>
+	<br>
+	<div id="usuarios">
+		<%if @usuarios.count > 0%>
+			<table class="table table-hover">
+			  <tr>
+			    <th>Nombres</th>
+			    <th>Apellidos</th>
+			    <th>Tipo de identifiación</th>
+			    <th>Identifiación</th>
+			    <th>Categoría</th>
+			    <th>Acciones</th>
+			  </tr>
+				<% @usuarios.each do |usuario|%>
+					<tr>
+				  	<td><%= usuario.nombres %></td>
+				    <td><%= usuario.apellidos %></td>
+				  	<td><%= usuario.tipo_identificacion %></td>
+				    <td><%= usuario.identificacion %></td>
+				    <td><%= usuario.categoria %></td>
+				  	<td>
+			        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), "#", class: "btn", :rel => "tooltip", :"title" => "Ver detalles")%>
+			        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), "#", class: "btn", :rel => "tooltip", :"title" => "Editar capacitación")%>
+			        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), "#", method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar capacitacion")%>
+				    </td>
+					</tr>
+				<%end%>
+			</table>
+		<%else%>
+			<p class="well">Usted no ha agregado ningún usuario para esta capacitación.</p>
+		<%end%>
 	</div>
 </fieldset>

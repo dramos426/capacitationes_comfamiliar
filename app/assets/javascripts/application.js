@@ -15,8 +15,9 @@
 //= require_tree .
 $(function() {
   $('#datepicker').datepicker();
+  $( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
   $('#capacitacion_valor_base').change(function(){
-    var valor_base = $('#capacitacion_valor_base').val()
+    var valor_base = $('#capacitacion_valor_base').val();
     if ( valor_base != "") {
       cat_a = (valor_base*0.5);
       cat_b = (valor_base*0.7);
@@ -28,4 +29,38 @@ $(function() {
       $('#capacitacion_valor_cat_d').val(cat_d);
     }
   });
+  var status = true;
+  $('#add_user').click(function(){
+    if (status) {
+      $('#form_user').slideDown();
+      $('#add_user').text("Ocultar Formulario ");
+      var etq_i = $("<i>");
+      etq_i.addClass("icon-chevron-up");
+      $('#add_user').append(etq_i);
+      status = false;
+    } else {
+      $('#form_user').slideUp();
+      var etq_i = $("<i>");
+      etq_i.addClass("icon-chevron-down");
+      $('#add_user').text("Agregar Usuario ");
+      $('#add_user').append(etq_i);
+      status = true;
+    }
+  });
+  $('#add_new_user').click(function(e){
+    e.preventDefault();
+    if ($('#usuario_identificacion').val() ==""){
+      alert("Debe digitar una identifiación para el usuario");
+      return;
+    }
+    if ($('#usuario_nombres').val() ==""){
+      alert("Debe digitar un nombre para el usuario");
+      return;
+    }
+    if ($('#usuario_apellidos').val() ==""){
+      alert("Debe digitar un apellido para el usuario");
+      return;
+    }
+    $('#new_user').submit();
+  })
 });

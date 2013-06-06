@@ -13,6 +13,6 @@ class Capacitacion < ActiveRecord::Base
 
 
   belongs_to :capacitador
-  has_many :capacitacion_usuarios
+  has_many :capacitacion_usuarios, :dependent => :destroy
   has_many :usuarios, :through => :capacitacion_usuarios
 end

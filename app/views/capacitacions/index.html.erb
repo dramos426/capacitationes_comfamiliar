@@ -14,18 +14,18 @@
   </tr>
 
 	<% @capacitaciones.each do |capacitacion| %>
-	<tr>
-  	<td><%= capacitacion.tema %></td>
-    <td><%= capacitacion.valor_base %></td>
-  	<td><%= capacitacion.fecha.strftime("%m/%d/%Y") %></td>
-    <td><%= capacitacion.institucion %></td>
-    <td><%= capacitacion.capacitador.full_name%></td>
-  	<td>
-        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), capacitacion, class: "btn", :rel => "tooltip", :"title" => "Ver detalles")%>
-        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_capacitacion_path(capacitacion), class: "btn", :rel => "tooltip", :"title" => "Editar capacitación")%>
-        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), capacitacion, method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar capacitacion")%>
-    </td>
-	</tr>
+  	<tr>
+    	<td><%= capacitacion.tema %></td>
+      <td><%= capacitacion.valor_base %></td>
+    	<td><%= capacitacion.fecha.strftime("%d/%m/%Y") %></td>
+      <td><%= capacitacion.institucion %></td>
+      <td><%= capacitacion.capacitador.full_name%></td>
+    	<td>
+          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), capacitacion, class: "btn", :rel => "tooltip", :"title" => "Ver detalles")%>
+          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_capacitacion_path(capacitacion), class: "btn", :rel => "tooltip", :"title" => "Editar capacitación")%>
+          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), capacitacion, method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar capacitacion")%>
+      </td>
+  	</tr>
 	<% end %>
 </table>
 
