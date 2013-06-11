@@ -1,8 +1,11 @@
 CapacitacionesComfamiliar::Application.routes.draw do
 
   resources :capacitacions do
-    resources :usuarios, :only => [:show, :create, :destroy, :update]
+    resources :usuarios, :only => [:create] do
+      delete "unlink", to: "usuarios#unlink", as: :unlik_user
+    end
   end
+  resources :usuarios, :except => [:show]
 
   devise_for :capacitadors
 

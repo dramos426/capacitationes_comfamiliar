@@ -30,6 +30,7 @@ $(function() {
     }
   });
   var status = true;
+  var identifiation = $('#identification_search').val();
   $('#add_user').click(function(){
     if (status) {
       $('#form_user').slideDown();
@@ -42,8 +43,7 @@ $(function() {
       $('#form_user').slideUp();
       var etq_i = $("<i>");
       etq_i.addClass("icon-chevron-down");
-      $('#add_user').text("Agregar Usuario ");
-      $('#add_user').append(etq_i);
+      $('#add_user').text("Agregar Usuario ").append(etq_i);
       status = true;
     }
   });

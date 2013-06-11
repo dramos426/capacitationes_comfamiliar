@@ -56,5 +56,6 @@ class CapacitacionsController < ApplicationController
   def show
     @capacitacion= Capacitacion.find(params[:id])
     @usuarios = @capacitacion.usuarios
+    @usuario = Usuario.new
   end
 end

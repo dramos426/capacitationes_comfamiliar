@@ -1,0 +1,27 @@
+<div class="well hide", id="form_user">
+	<% data = @capacitacion ? [@capacitacion, @usuarios.build] : @usuario %>
+	<%= form_for data, :html => {:id => "new_user"} do |f|%>
+		<%= f.label :tipo_identificacion, "Tipo de identificación *"%>
+		<%= f.select :tipo_identificacion, options_for_select(Usuario::TIPOS_IDENTIFICACION.invert)%>
+		<%= f.label :identificacion, "Identificación *"%>
+		<%= f.text_field :identificacion%>
+		<%= f.label :nombres, "Nombres *"%>
+		<%= f.text_field :nombres%>
+		<%= f.label :apellidos, "Apellidos *"%>
+		<%= f.text_field :apellidos%>
+		<%= f.label :telefono, "Teléfono"%>
+		<%= f.text_field :telefono%>
+		<%= f.label :categoria, "Categoría *"%>
+		<% if @capacitacion%>
+			<% if @capacitacion.valor_cat_e.present? %>
+				<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert)%>
+			<%else%>
+				<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert.delete_if {|key, val| key == "E"})%>
+			<%end%>	
+		<%else%>
+			<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert)%>
+		<%end%>
+		<br>
+		<%= f.submit "Agregar Usuario" , class: "btn btn-primary", id: "add_new_user"%>
+	<%end%>
+</div>

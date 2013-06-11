@@ -40,6 +40,11 @@
 	  	<h4>Observaciones</h4>
 	  	<%= f.text_area(:observaciones, :size => '240x10', :id => "observaciones")%>
 	  </div>
-	  <%= f.submit "algo" , class: "btn btn-primary"%>
+	  <%= f.submit "Guardar" , class: "btn btn-primary"%>
+	  <%if !@capacitacion.new_record?%>
+	  	<%= link_to "Cancelar", @capacitacion, class: "btn"%>
+		<% else %>
+			<%= link_to "Cancelar", capacitacions_path, class: "btn"%>
+		<% end %>
 	<% end %>
 </div>

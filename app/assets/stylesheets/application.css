@@ -32,3 +32,6 @@
 .hide{
 	display: none;
 }
+.general.container{
+	padding-bottom: 65px;
+}

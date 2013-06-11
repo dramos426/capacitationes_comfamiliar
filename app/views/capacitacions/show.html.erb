@@ -14,61 +14,46 @@
 
 		<%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash icon-white")+" Eliminar"), capacitacion_path(@capacitacion), method: :delete, class: "btn btn-primary", confirm: "¿Estás seguro de eliminar esta capacitación?", :rel => "tooltip", :"title" => "Eliminar Capacitacion")%>
 
+		<input id="identification_search", type="text", style="margin-bottom: 0px;", placeholder="Número de identificación"></input>
 		<button class="btn", id="add_user">Agregar Usuario <%=content_tag(:span, content_tag(:i, nil, :class => " icon-chevron-down icon-black"))%></button>
 	</div>
 	<br>
 	<legend>
 		Usuarios
 	</legend>
-	<div class="well hide", id="form_user">
-		<%= form_for [@capacitacion, @usuarios.build], :html => {:id => "new_user"} do |f|%>
-			<%= f.label :tipo_identificacion%>
-			<%= f.select :tipo_identificacion, options_for_select(Usuario::TIPOS_IDENTIFICACION.invert)%>
-			<%= f.label :identificacion%>
-			<%= f.text_field :identificacion%>
-			<%= f.label :nombres%>
-			<%= f.text_field :nombres%>
-			<%= f.label :apellidos%>
-			<%= f.text_field :apellidos%>
-			<%= f.label :categoria%>
-			<%if @capacitacion.valor_cat_e.present?%>
-				<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert)%>
-			<%else%>
-				<%= f.select :categoria, options_for_select(Usuario::CATEGORIAS.invert.delete_if {|key, val| key == "E"})%>
-			<%end%>
-			<br>
-			<%= f.submit "Agregar Usuario" , class: "btn btn-primary", id: "add_new_user"%>
-		<%end%>
-	</div>
+	<%= render "usuarios/form"%>
 	<br>
 	<div id="usuarios">
 		<%if @usuarios.count > 0%>
 			<table class="table table-hover">
-			  <tr>
-			    <th>Nombres</th>
-			    <th>Apellidos</th>
-			    <th>Tipo de identifiación</th>
-			    <th>Identifiación</th>
-			    <th>Categoría</th>
-			    <th>Acciones</th>
-			  </tr>
-				<% @usuarios.each do |usuario|%>
-					<tr>
-				  	<td><%= usuario.nombres %></td>
-				    <td><%= usuario.apellidos %></td>
-				  	<td><%= usuario.tipo_identificacion %></td>
-				    <td><%= usuario.identificacion %></td>
-				    <td><%= usuario.categoria %></td>
-				  	<td>
-			        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), "#", class: "btn", :rel => "tooltip", :"title" => "Ver detalles")%>
-			        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), "#", class: "btn", :rel => "tooltip", :"title" => "Editar capacitación")%>
-			        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), "#", method: :delete, data: { confirm: '¿Estás seguro de eliminar esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar capacitacion")%>
-				    </td>
-					</tr>
-				<%end%>
+			  <thead>
+				  <tr>
+				    <th>Nombres</th>
+				    <th>Apellidos</th>
+				    <th>Tipo de identifiación</th>
+				    <th>Identifiación</th>
+				    <th>Categoría</th>
+				    <th>Acciones</th>
+				  </tr>
+			  </thead>
+			  <tbody>
+					<% @capacitacion.usuarios.keep_if{|u| !u.new_record?}.each do |usuario|%>
+						<tr>
+					  	<td><%= usuario.nombres %></td>
+					    <td><%= usuario.apellidos %></td>
+					  	<td><%= usuario.tipo_identificacion %></td>
+					    <td><%= usuario.identificacion %></td>
+					    <td><%= usuario.categoria %></td>
+					  	<td>
+				        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-minus-sign")+" Desvincular"), capacitacion_usuario_unlik_user_path(@capacitacion, usuario), method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario de esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Desvincular Usuario")%>
+					    </td>
+						</tr>
+					<%end%>
+				</tbody>
 			</table>
 		<%else%>
 			<p class="well">Usted no ha agregado ningún usuario para esta capacitación.</p>
 		<%end%>
 	</div>
+	<%= link_to "Todas las capacitaciones", capacitacions_path, class: "btn btn-primary"%>
 </fieldset>

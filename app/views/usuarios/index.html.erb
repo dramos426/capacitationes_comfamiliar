@@ -1,0 +1,40 @@
+<fieldset>
+  <legend>
+    Listado de Usuarios
+  </legend>
+  <button class="btn btn-primary", id="add_user">Agregar Usuario <%=content_tag(:span, content_tag(:i, nil, :class => " icon-chevron-down icon-black"))%></button>
+  <br></br>
+  <%= render "usuarios/form"%>
+  <table class="table table-hover">
+    <tr>
+      <th>Nombres</th>
+      <th>Apellidos</th>
+      <th>Telefono</th>
+      <th>Tipo ID</th>
+      <th>Identificación</th>
+      <th>Categoría</th>
+      <th>Fecha de creación</th>
+      <th>Fecha de actualización</th>
+    </tr>
+
+  	<% @usuarios.each do |usuario| %>
+    	<tr>
+      	<td><%= usuario.nombres %></td>
+        <td><%= usuario.apellidos %></td>
+      	<td><%= usuario.telefono%></td>
+        <td><%= usuario.tipo_identificacion %></td>
+        <td><%= usuario.identificacion%></td>
+        <td><%= usuario.categoria%></td>
+        <td><%= usuario.created_at.strftime("%d/%m/%Y") %></td>
+        <td><%= usuario.updated_at.strftime("%d/%m/%Y") %></td>
+      	<td>
+            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), usuario, class: "btn", :rel => "tooltip", :"title" => "Ver detalles de usuario")%>
+            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_usuario_path(usuario), class: "btn", :rel => "tooltip", :"title" => "Editar usuario")%>
+            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), usuario, method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar usuario")%>
+        </td>
+    	</tr>
+  	<% end %>
+  </table>
+
+  <br />
+</fieldset>

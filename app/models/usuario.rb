@@ -10,8 +10,9 @@ class Usuario < ActiveRecord::Base
   validates :tipo_identificacion, presence: {:message => "no puede estar en blanco"}
   validates :identificacion, presence: {:message => "no puede estar en blanco"}
   validates :categoria, :length => {maximum: 5}
+  validates :identificacion, uniqueness: {:message => "no puede repetirse, ya existe un usuario con la identificación digitada"} 
 
-  has_many :capacitacion_usuarios
+  has_many :capacitacion_usuarios, :dependent => :destroy
   has_many :capacitadors, :through => :capacitacion_usuarios
 
   def full_name

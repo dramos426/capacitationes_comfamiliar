@@ -32,11 +32,12 @@
       <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-home icon-white")+" "), root_path, class: "brand", :rel => "tooltip", :"title" => "Ir al inicio")%>
       <%if capacitador_signed_in? %>
         <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-list icon-white")+" "), capacitacions_path, class: "brand", :rel => "tooltip", :"title" => "Listado de capacitaciones")%>
+        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-user icon-white")+" "), usuarios_path, class: "brand", :rel => "tooltip", :"title" => "Listado de usuarios")%>
       <%end%>
       </ul>
         <%if capacitador_signed_in? %>
           <ul class = "nav pull-right">
-            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-user icon-white")+" #{current_capacitador.nombres}"), edit_capacitador_registration_path, class: "brand", :rel => "tooltip", :"title" => "Editar perfil")%>
+            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil icon-white")+" #{current_capacitador.nombres}"), edit_capacitador_registration_path, class: "brand", :rel => "tooltip", :"title" => "Editar perfil")%>
             <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-off icon-white")+" Cerrar Sesión"), destroy_capacitador_session_path, method: :delete, class: "brand", :rel => "tooltip", :"title" => "Cerrar sesión")%>
           </ul>
       <%else%>
