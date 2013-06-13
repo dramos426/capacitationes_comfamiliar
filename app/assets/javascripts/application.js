@@ -30,8 +30,19 @@ $(function() {
     }
   });
   var status = true;
-  var identifiation = $('#identification_search').val();
   $('#add_user').click(function(){
+    $.ajax({
+      url: '/usuarios/search_user',
+      data: 'user_identificacion='+$('#identification_search').val(),
+      success: function(response) {
+        if (response.found) {
+          $.ajax({
+            url: '/usuarios/add_user_to_cap',
+            data: 'usuario_id='+response.user.id, 'capacitacion_id='+$('#capacitacion_id').val()
+          });
+        }
+      }
+    });
     if (status) {
       $('#form_user').slideDown();
       $('#add_user').text("Ocultar Formulario ");

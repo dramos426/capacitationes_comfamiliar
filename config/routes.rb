@@ -5,7 +5,10 @@ CapacitacionesComfamiliar::Application.routes.draw do
       delete "unlink", to: "usuarios#unlink", as: :unlik_user
     end
   end
-  resources :usuarios, :except => [:show]
+  resources :usuarios, :except => [:show] do
+    get "search_user", to: "usuarios#search", as: :search_user, on: :collection
+    post "add_user_to_cap", to: "usuarios#add_user_to_cap", as: :add_user_to_cap, on: :collection
+  end
 
   devise_for :capacitadors
 

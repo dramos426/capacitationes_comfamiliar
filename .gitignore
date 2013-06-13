@@ -13,3 +13,5 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+/capacitaciones_comfamiliar_development
+/capacitaciones_comfamiliar_test

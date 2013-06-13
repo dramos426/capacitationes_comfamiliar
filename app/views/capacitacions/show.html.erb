@@ -2,6 +2,7 @@
 	<legend>
 		Capacitación - <%=@capacitacion.tema%>
 	</legend>
+	<%=hidden_field_tag 'capacitacion_id', @capacitacion.id%>
 	<div class="well">
 		<p><strong>Tema:</strong> <%=@capacitacion.tema%></p>
 		<p><strong>Capacitador:</strong> <%=@capacitacion.capacitador.full_name%></p>

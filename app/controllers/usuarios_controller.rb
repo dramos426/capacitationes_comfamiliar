@@ -9,7 +9,7 @@ class UsuariosController < ApplicationController
     end
   	
   	if @usuario.save && @capacitacion
-  		CapacitacionUsuario.create(usuario: @usuario, capacitacion: @capacitacion)
+  		
   		redirect_to capacitacion_path(@capacitacion), notice: "El usuario se ha agregado correctamente"
   	elsif @usuario.save && !@capacitacion
       redirect_to usuarios_path, notice: "El usuario se ha agregado correctamente"
@@ -51,4 +51,24 @@ class UsuariosController < ApplicationController
     @usuarios = Usuario.all
     @usuario = Usuario.new
   end
+
+  def search
+    usuario = Usuario.find_by_identificacion(params[:user_identificacion])
+    resp = {}
+    resp[:found] = usuario.present?
+    resp[:user] = usuario
+    render resp.to_json
+  end
+
+  def add_user_to_cap
+    capacitacion = Capacitacion.find(params[:capacitacion_id])
+    usuario = Usuario.find(params[:usuario_id])
+    cap_usuario = CapacitacionUsuario.new(usuario: usuario, capacitacion: capacitacion)
+    if cap_usuario.save
+      redirect_to capacitacion, notice: "El usuario #{usuario.full_name} ha sido añadido a esta capacitación"
+    else
+      redirect_to capacitacion, notice: "El usuario no pudo ser añadido a esta capacitación"
+    end
+  end
+
 end
