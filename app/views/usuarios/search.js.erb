@@ -1,0 +1,11 @@
+<% if (@resp[:found]) %>
+  $('.table').append("<%= j render partial: 'usuario', locals: {usuario: @resp[:user], capacitacion_id: @resp[:capacitacion_id]} %>");
+  $.ajax({
+    type: 'POST',
+    url: '/usuarios/add_user_to_cap',
+    data: {'usuario_id': <%= @resp[:user].id %>, 'capacitacion_id': <%= @resp[:capacitacion_id] %>}
+  });
+<% else %>
+  $('#usuario_identificacion').val($('#identification_search').val());
+  slide("#add_user");
+<% end %>

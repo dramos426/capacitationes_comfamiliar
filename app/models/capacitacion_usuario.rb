@@ -3,5 +3,5 @@ class CapacitacionUsuario < ActiveRecord::Base
   belongs_to :usuario
   belongs_to :capacitacion
   validates_presence_of :usuario, :capacitacion
-  validates_uniqueness_of :usuario_id, :scope => :capacitacion
+  validates_uniqueness_of :usuario_id, :scope => :capacitacion_id
 end

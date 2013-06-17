@@ -16,7 +16,7 @@
 		<%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash icon-white")+" Eliminar"), capacitacion_path(@capacitacion), method: :delete, class: "btn btn-primary", confirm: "¿Estás seguro de eliminar esta capacitación?", :rel => "tooltip", :"title" => "Eliminar Capacitacion")%>
 
 		<input id="identification_search", type="text", style="margin-bottom: 0px;", placeholder="Número de identificación"></input>
-		<button class="btn", id="add_user">Agregar Usuario <%=content_tag(:span, content_tag(:i, nil, :class => " icon-chevron-down icon-black"))%></button>
+		<button class="btn", id="find_user">Agregar Usuario <%=content_tag(:span, content_tag(:i, nil, :class => " icon-chevron-down icon-black"))%></button>
 	</div>
 	<br>
 	<legend>
@@ -25,35 +25,23 @@
 	<%= render "usuarios/form"%>
 	<br>
 	<div id="usuarios">
-		<%if @usuarios.count > 0%>
-			<table class="table table-hover">
-			  <thead>
-				  <tr>
-				    <th>Nombres</th>
-				    <th>Apellidos</th>
-				    <th>Tipo de identifiación</th>
-				    <th>Identifiación</th>
-				    <th>Categoría</th>
-				    <th>Acciones</th>
-				  </tr>
-			  </thead>
-			  <tbody>
-					<% @capacitacion.usuarios.keep_if{|u| !u.new_record?}.each do |usuario|%>
-						<tr>
-					  	<td><%= usuario.nombres %></td>
-					    <td><%= usuario.apellidos %></td>
-					  	<td><%= usuario.tipo_identificacion %></td>
-					    <td><%= usuario.identificacion %></td>
-					    <td><%= usuario.categoria %></td>
-					  	<td>
-				        <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-minus-sign")+" Desvincular"), capacitacion_usuario_unlik_user_path(@capacitacion, usuario), method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario de esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Desvincular Usuario")%>
-					    </td>
-						</tr>
-					<%end%>
-				</tbody>
-			</table>
-		<%else%>
-			<p class="well">Usted no ha agregado ningún usuario para esta capacitación.</p>
+		<table class="table table-hover">
+		  <thead>
+			  <tr>
+			    <th>Nombres</th>
+			    <th>Apellidos</th>
+			    <th>Tipo de identifiación</th>
+			    <th>Identifiación</th>
+			    <th>Categoría</th>
+			    <th>Acciones</th>
+			  </tr>
+		  </thead>
+		  <tbody>
+		  	<%= render @capacitacion.usuarios.keep_if{|u| !u.new_record?} %>
+			</tbody>
+		</table>
+		<%if @usuarios.count == 0%>
+			<p class="well" id="not_users">Usted no ha agregado ningún usuario para esta capacitación.</p>
 		<%end%>
 	</div>
 	<%= link_to "Todas las capacitaciones", capacitacions_path, class: "btn btn-primary"%>

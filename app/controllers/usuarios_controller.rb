@@ -1,6 +1,6 @@
 # encoding: utf-8
 class UsuariosController < ApplicationController
-  
+  skip_before_filter :verify_authenticity_token, :only => [:add_user_to_cap]
   def create
   	if params[:capacitacion_id].present? && @capacitacion = Capacitacion.find(params[:capacitacion_id])
       @usuario = @capacitacion.usuarios.build(params[:usuario])
@@ -54,21 +54,22 @@ class UsuariosController < ApplicationController
 
   def search
     usuario = Usuario.find_by_identificacion(params[:user_identificacion])
-    resp = {}
-    resp[:found] = usuario.present?
-    resp[:user] = usuario
-    render resp.to_json
+    @capacitacion = Capacitacion.find(params[:capacitacion_id])
+    @resp = {
+      capacitacion_id: params[:capacitacion_id],
+      found: usuario.present?,
+      user: usuario
+    }
   end
 
   def add_user_to_cap
     capacitacion = Capacitacion.find(params[:capacitacion_id])
     usuario = Usuario.find(params[:usuario_id])
-    cap_usuario = CapacitacionUsuario.new(usuario: usuario, capacitacion: capacitacion)
-    if cap_usuario.save
-      redirect_to capacitacion, notice: "El usuario #{usuario.full_name} ha sido añadido a esta capacitación"
-    else
+    cap_usuario = CapacitacionUsuario.new(usuario_id: usuario.id, capacitacion_id: capacitacion.id)
+    if !cap_usuario.save
       redirect_to capacitacion, notice: "El usuario no pudo ser añadido a esta capacitación"
     end
+    render :nothing => true
   end
 
 end

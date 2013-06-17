@@ -29,35 +29,27 @@ $(function() {
       $('#capacitacion_valor_cat_d').val(cat_d);
     }
   });
-  var status = true;
-  $('#add_user').click(function(){
+  $('#find_user').click(function(){
     $.ajax({
       url: '/usuarios/search_user',
-      data: 'user_identificacion='+$('#identification_search').val(),
+      data: {
+        user_identificacion: $('#identification_search').val(),
+        capacitacion_id: $('#capacitacion_id').val()
+      },
       success: function(response) {
         if (response.found) {
-          $.ajax({
-            url: '/usuarios/add_user_to_cap',
-            data: 'usuario_id='+response.user.id, 'capacitacion_id='+$('#capacitacion_id').val()
-          });
+          
+        }else {
+          $('#usuario_identificacion').val($('#identification_search').val());
+          slide("#find_user");
         }
       }
     });
-    if (status) {
-      $('#form_user').slideDown();
-      $('#add_user').text("Ocultar Formulario ");
-      var etq_i = $("<i>");
-      etq_i.addClass("icon-chevron-up");
-      $('#add_user').append(etq_i);
-      status = false;
-    } else {
-      $('#form_user').slideUp();
-      var etq_i = $("<i>");
-      etq_i.addClass("icon-chevron-down");
-      $('#add_user').text("Agregar Usuario ").append(etq_i);
-      status = true;
-    }
   });
+  $('#add_user').click(function(){
+    slide("#add_user");
+  });
+  
   $('#add_new_user').click(function(e){
     e.preventDefault();
     if ($('#usuario_identificacion').val() ==""){
@@ -73,5 +65,23 @@ $(function() {
       return;
     }
     $('#new_user').submit();
-  })
+  });
 });
+
+var status = true;
+function slide(sel){
+  if (status) {
+    $('#form_user').slideDown();
+    $(sel).text("Ocultar Formulario ");
+    var etq_i = $("<i>");
+    etq_i.addClass("icon-chevron-up");
+    $(sel).append(etq_i);
+    status = false;
+  } else {
+    $('#form_user').slideUp();
+    var etq_i = $("<i>");
+    etq_i.addClass("icon-chevron-down");
+    $(sel).text("Agregar Usuario ").append(etq_i);
+    status = true;
+  }
+}

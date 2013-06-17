@@ -28,9 +28,9 @@
         <td><%= usuario.created_at.strftime("%d/%m/%Y") %></td>
         <td><%= usuario.updated_at.strftime("%d/%m/%Y") %></td>
       	<td>
-            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), usuario, class: "btn", :rel => "tooltip", :"title" => "Ver detalles de usuario")%>
-            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_usuario_path(usuario), class: "btn", :rel => "tooltip", :"title" => "Editar usuario")%>
-            <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), usuario, method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar usuario")%>
+          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), usuario, class: "btn", :rel => "tooltip", :"title" => "Ver detalles de usuario")%>
+          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_usuario_path(usuario), class: "btn", :rel => "tooltip", :"title" => "Editar usuario")%>
+          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), usuario, method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar usuario")%>
         </td>
     	</tr>
   	<% end %>
