@@ -16,6 +16,7 @@
 $(function() {
   $('#datepicker').datepicker();
   $( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+
   $('#capacitacion_valor_base').change(function(){
     var valor_base = $('#capacitacion_valor_base').val();
     if ( valor_base != "") {
@@ -29,27 +30,15 @@ $(function() {
       $('#capacitacion_valor_cat_d').val(cat_d);
     }
   });
+
   $('#find_user').click(function(){
-    $.ajax({
-      url: '/usuarios/search_user',
-      data: {
-        user_identificacion: $('#identification_search').val(),
-        capacitacion_id: $('#capacitacion_id').val()
-      },
-      success: function(response) {
-        if (response.found) {
-          
-        }else {
-          $('#usuario_identificacion').val($('#identification_search').val());
-          slide("#find_user");
-        }
-      }
-    });
+    addUser();
   });
+
   $('#add_user').click(function(){
-    slide("#add_user");
+    slide(this);
   });
-  
+
   $('#add_new_user').click(function(e){
     e.preventDefault();
     if ($('#usuario_identificacion').val() ==""){
@@ -66,11 +55,16 @@ $(function() {
     }
     $('#new_user').submit();
   });
+
+  $('#identification_search').keypress(function(k){
+    if (k.keyCode != 13) {return}
+    addUser();
+  });
 });
 
 var status = true;
 function slide(sel){
-  if (status) {
+  if (status == "true") {
     $('#form_user').slideDown();
     $(sel).text("Ocultar Formulario ");
     var etq_i = $("<i>");
@@ -84,4 +78,14 @@ function slide(sel){
     $(sel).text("Agregar Usuario ").append(etq_i);
     status = true;
   }
+}
+
+function addUser(){
+  $.ajax({
+    url: '/usuarios/search_user',
+    data: {
+      user_identificacion: $('#identification_search').val(),
+      capacitacion_id: $('#capacitacion_id').val()
+    }
+  });
 }

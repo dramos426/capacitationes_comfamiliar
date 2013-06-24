@@ -14,7 +14,7 @@
       <th>Identificación</th>
       <th>Categoría</th>
       <th>Fecha de creación</th>
-      <th>Fecha de actualización</th>
+      <th>Acciones</th>
     </tr>
 
   	<% @usuarios.each do |usuario| %>
@@ -24,9 +24,8 @@
       	<td><%= usuario.telefono%></td>
         <td><%= usuario.tipo_identificacion %></td>
         <td><%= usuario.identificacion%></td>
-        <td><%= usuario.categoria%></td>
+        <td><%= Usuario::CATEGORIAS[usuario.categoria.to_sym]%></td>
         <td><%= usuario.created_at.strftime("%d/%m/%Y") %></td>
-        <td><%= usuario.updated_at.strftime("%d/%m/%Y") %></td>
       	<td>
           <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), usuario, class: "btn", :rel => "tooltip", :"title" => "Ver detalles de usuario")%>
           <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_usuario_path(usuario), class: "btn", :rel => "tooltip", :"title" => "Editar usuario")%>

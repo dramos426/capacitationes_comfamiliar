@@ -33,17 +33,6 @@ class UsuariosController < ApplicationController
     end
   end
 
-  def unlink
-    @capacitacion = Capacitacion.find(params[:capacitacion_id])
-    @usuario = Usuario.find(params[:usuario_id])
-    @capacitacion_usuario = CapacitacionUsuario.where(capacitacion_id: @capacitacion.id, usuario_id: @usuario.id)
-    if @capacitacion_usuario.delete
-      redirect_to @capacitacion, notice: "El usuario ha sido desvinculado de esta capacitación"
-    else
-      redirect_to @capacitacion, alert: "El usuario ha podido ser desvinculado de esta capacitación"
-    end
-  end
-
   def update
   end
 
@@ -70,6 +59,17 @@ class UsuariosController < ApplicationController
       redirect_to capacitacion, notice: "El usuario no pudo ser añadido a esta capacitación"
     end
     render :nothing => true
+  end
+
+  def unlink
+    @capacitacion = Capacitacion.find(params[:capacitacion_id])
+    @usuario = Usuario.find(params[:usuario_id])
+    @capacitacion_usuario = CapacitacionUsuario.find_by_capacitacion_id_and_usuario_id(@capacitacion.id, @usuario.id)
+    @resp = { deleted: @capacitacion_usuario.delete }
+    respond_to do |format|
+      # format.html {redirect_to @capacitacion, :notice => "El usuario ha sido desvinculado correctamente."}
+      format.js
+    end
   end
 
 end

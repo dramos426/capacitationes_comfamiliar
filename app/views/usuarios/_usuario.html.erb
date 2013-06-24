@@ -1,10 +1,10 @@
-<tr>
+<tr id=<%="row_#{usuario.id}"%>>
   <td><%= usuario.nombres %></td>
   <td><%= usuario.apellidos %></td>
   <td><%= usuario.tipo_identificacion %></td>
   <td><%= usuario.identificacion %></td>
-  <td><%= usuario.categoria %></td>
+  <td><%= Usuario::CATEGORIAS[usuario.categoria.to_sym]%></td>
   <td>
-    <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-minus-sign")+" Desvincular"), capacitacion_usuario_unlik_user_path(@capacitacion, usuario), method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario de esta capacitación?' }, class: "btn", :rel => "tooltip", :"title" => "Desvincular Usuario")%>
+    <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-minus-sign")+" Desvincular"), capacitacion_usuario_unlik_user_path(@capacitacion, usuario), method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario de esta capacitación?' }, remote: true, class: "btn", :rel => "tooltip", :"title" => "Desvincular Usuario")%>
   </td>
 </tr>

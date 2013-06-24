@@ -1,0 +1,6 @@
+<% if (@resp[:deleted]) %>
+  <% row = "#row_#{@usuario.id}"%>
+  $('<%=row%>').remove();
+<% else %>
+  alert('No se pudo desvincular el usuario.')
+<% end %>

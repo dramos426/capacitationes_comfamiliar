@@ -5,6 +5,7 @@
     url: '/usuarios/add_user_to_cap',
     data: {'usuario_id': <%= @resp[:user].id %>, 'capacitacion_id': <%= @resp[:capacitacion_id] %>}
   });
+  $('#identification_search').val('');
 <% else %>
   $('#usuario_identificacion').val($('#identification_search').val());
   slide("#add_user");
