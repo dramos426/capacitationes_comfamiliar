@@ -4,3 +4,7 @@
 <% else %>
   alert('No se pudo desvincular el usuario.')
 <% end %>
+<% if (@capacitacion.usuarios.count == 0) %>
+	$('#not_users').show(500);
+	$('#user_table').hide(500);
+<% end %>

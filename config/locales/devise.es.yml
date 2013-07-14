@@ -1,4 +1,11 @@
 es:
+  views:
+    pagination:
+      first: "<<"
+      last: ">>"
+      previous: "<"
+      next: ">"
+      truncate: "..."
   errors:
     messages:
       not_found: "no se encontró"

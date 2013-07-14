@@ -2,23 +2,23 @@
 class UsuariosController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:add_user_to_cap]
   def create
-  	if params[:capacitacion_id].present? && @capacitacion = Capacitacion.find(params[:capacitacion_id])
-      @usuario = @capacitacion.usuarios.build(params[:usuario])
-    else
-      @usuario = Usuario.new(params[:usuario])
-    end
+  	@capacitacion = Capacitacion.find(params[:capacitacion_id]) if params[:capacitacion_id].present?
+    @usuario = Usuario.new(params[:usuario])
   	
-  	if @usuario.save && @capacitacion
-  		
-  		redirect_to capacitacion_path(@capacitacion), notice: "El usuario se ha agregado correctamente"
+  	if @usuario.save && @capacitacion		
+  		if CapacitacionUsuario.create(:usuario_id => @usuario.id, :capacitacion_id => @capacitacion.id)
+        redirect_to capacitacion_path(@capacitacion), notice: "El usuario se ha agregado correctamente."
+      else
+        redirect_to capacitacion_path(@capacitacion), alert: "El usuario se ha creado, pero no se pudo agregar a la capacitación."
+      end
   	elsif @usuario.save && !@capacitacion
-      redirect_to usuarios_path, notice: "El usuario se ha agregado correctamente"
+      redirect_to usuarios_path, notice: "El usuario se ha agregado correctamente."
     elsif @usuario.errors.any?
       resp = ""
       @usuario.errors.full_messages.each do |msg|
         resp = resp + " - " + msg
       end
-  		flash[:alert] = "No se pudo agregar el usuario #{resp}"
+  		flash[:alert] = "No se pudo agregar el usuario #{resp}."
       redirect_to "#{@capacitacion ? @capacitacion : usuarios_path}"
   	end
   end
@@ -26,18 +26,25 @@ class UsuariosController < ApplicationController
   def destroy
     @usuario = Usuario.find(params[:id])
     if @usuario.destroy
-      redirect_to usuarios_path, notice: "El usuario ha sido eliminado correctamente"
+      redirect_to usuarios_path, notice: "El usuario ha sido eliminado correctamente."
     else
-      flash[:alert] = "El usuario no se ha podido eliminar"
+      flash[:alert] = "El usuario no se ha podido eliminar."
       redirect_to usuarios_path
     end
   end
 
   def update
+    @usuario = Usuario.find(params[:id])
+    if @usuario.update_attributes(params[:usuario])
+      redirect_to usuarios_path, notice: "El usuario ha sido actualizado correctamente."
+    else
+      flash[:alert] = "El usuario no se ha podido actualizar."
+      redirect_to usuarios_path
+    end
   end
 
   def index
-    @usuarios = Usuario.all
+    @usuarios = Usuario.order("apellidos ASC").page(params[:page]).per(10)
     @usuario = Usuario.new
   end
 
@@ -67,7 +74,6 @@ class UsuariosController < ApplicationController
     @capacitacion_usuario = CapacitacionUsuario.find_by_capacitacion_id_and_usuario_id(@capacitacion.id, @usuario.id)
     @resp = { deleted: @capacitacion_usuario.delete }
     respond_to do |format|
-      # format.html {redirect_to @capacitacion, :notice => "El usuario ha sido desvinculado correctamente."}
       format.js
     end
   end

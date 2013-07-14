@@ -14,6 +14,9 @@
 //= require jquery_ujs
 //= require_tree .
 $(function() {
+  
+  setTimeout(function hideFlash(){ $('.alert').slideUp('slow');}, 8000);
+
   $('#datepicker').datepicker();
   $( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
 
@@ -43,14 +46,17 @@ $(function() {
     e.preventDefault();
     if ($('#usuario_identificacion').val() ==""){
       alert("Debe digitar una identifiación para el usuario");
+      $('#usuario_identificacion').focus();
       return;
     }
     if ($('#usuario_nombres').val() ==""){
       alert("Debe digitar un nombre para el usuario");
+      $('#usuario_nombres').focus();
       return;
     }
     if ($('#usuario_apellidos').val() ==""){
       alert("Debe digitar un apellido para el usuario");
+      $('#usuario_apellidos').focus()
       return;
     }
     $('#new_user').submit();

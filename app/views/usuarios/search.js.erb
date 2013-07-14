@@ -6,7 +6,15 @@
     data: {'usuario_id': <%= @resp[:user].id %>, 'capacitacion_id': <%= @resp[:capacitacion_id] %>}
   });
   $('#identification_search').val('');
+  $('#not_users').hide(500);
+  $('#user_table').show(500);
 <% else %>
   $('#usuario_identificacion').val($('#identification_search').val());
   slide("#add_user");
+  if ($('#identification_search').val() == "") {
+    $('#usuario_identificacion').focus();
+  }else{
+    $('#usuario_nombres').focus();
+  }
+  $('#identification_search').val('');
 <% end %>

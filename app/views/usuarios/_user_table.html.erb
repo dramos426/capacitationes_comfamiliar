@@ -1,0 +1,19 @@
+<%if @capacitacion.usuarios.count == 0%>
+	<table id="user_table", class="table table-hover", style= "display: none;">
+<%else%>
+	<table id="user_table", class="table table-hover">
+<%end%>
+  <thead>
+	  <tr>
+	    <th>Nombres</th>
+	    <th>Apellidos</th>
+	    <th>Tipo de identifiación</th>
+	    <th>Identifiación</th>
+	    <th>Categoría</th>
+	    <th>Acciones</th>
+	  </tr>
+  </thead>
+  <tbody>
+  	<%= render @capacitacion.usuarios.keep_if{|u| !u.new_record?} %>
+	</tbody>
+</table>

@@ -9,9 +9,9 @@
     <tr>
       <th>Nombres</th>
       <th>Apellidos</th>
-      <th>Telefono</th>
       <th>Tipo ID</th>
       <th>Identificación</th>
+      <th>Telefono</th>
       <th>Categoría</th>
       <th>Fecha de creación</th>
       <th>Acciones</th>
@@ -21,19 +21,42 @@
     	<tr>
       	<td><%= usuario.nombres %></td>
         <td><%= usuario.apellidos %></td>
-      	<td><%= usuario.telefono%></td>
         <td><%= usuario.tipo_identificacion %></td>
         <td><%= usuario.identificacion%></td>
+        <td><%= usuario.telefono%></td>
         <td><%= Usuario::CATEGORIAS[usuario.categoria.to_sym]%></td>
         <td><%= usuario.created_at.strftime("%d/%m/%Y") %></td>
       	<td>
-          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-eye-open")+" "), usuario, class: "btn", :rel => "tooltip", :"title" => "Ver detalles de usuario")%>
-          <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-pencil")+" "), edit_usuario_path(usuario), class: "btn", :rel => "tooltip", :"title" => "Editar usuario")%>
+          <a href="#modalEditUser<%="#{usuario.id}"%>" role="button" class="btn" data-toggle="modal"><i class="icon-edit" rel= "tooltip" title= "Editar Usuario"></i></a>
           <%=link_to(content_tag(:span, content_tag(:i, nil, :class => "icon-trash")+" "), usuario, method: :delete, data: { confirm: '¿Estás seguro de eliminar este usuario?' }, class: "btn", :rel => "tooltip", :"title" => "Eliminar usuario")%>
         </td>
     	</tr>
+      <div id="modalEditUser<%="#{usuario.id}"%>" class="modal hide fade ui-state-disabled" tabindex="-1" role="dialog" aria-labelledby="modalEditLabel" aria-hidden="true">
+        <div class="modal-header" style="height: 44px;">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="modalEditLabel">Editar Usuario</h3>
+          <hr>
+        </div>
+        <%= simple_form_for([usuario], html: {style: "margin-bottom: 0px"}) do |f|%>
+          <div class="modal-body">
+            <%= f.input :tipo_identificacion, label: "Tipo de Identificación", collection: Usuario::TIPOS_IDENTIFICACION.invert %>
+            <%= f.input :identificacion, label: "Identificación" %>
+            <%= f.input :nombres, label: "Nombres" %>
+            <%= f.input :apellidos, label: "Apellidos" %>
+            <%= f.input :telefono, label: "Teléfono" %>
+            <%= f.input :categoria, label: "Categoría", collection: Usuario::CATEGORIAS.invert%>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cerrar</button>
+            <%= f.button :submit , 'Actualizar', class: "btn btn-primary" %>
+          </div>
+        <%end%>
+      </div>
   	<% end %>
   </table>
+  <div class="pagination">
+    <%= paginate @usuarios %>
+  </div>
 
   <br />
 </fieldset>
