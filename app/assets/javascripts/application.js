@@ -17,8 +17,13 @@ $(function() {
   
   setTimeout(function hideFlash(){ $('.alert').slideUp('slow');}, 8000);
 
-  $('#datepicker').datepicker();
-  $( "#datepicker" ).datepicker( "option", "dateFormat", "dd-mm-yy" );
+  $.datepicker.setDefaults($.datepicker.regional["es"]);
+  $('#datepicker').datepicker({
+    numberOfMonths: 3,
+    showButtonPanel: true,
+    dateFormat: "yy-mm-dd"
+  });
+
 
   $('#capacitacion_valor_base').change(function(){
     var valor_base = $('#capacitacion_valor_base').val();
